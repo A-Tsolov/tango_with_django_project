@@ -5,6 +5,12 @@ from rango.models import Page
 from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -97,3 +103,32 @@ def register(request):
     return render(request, 'rango/register.html', {'user_form': user_form,
                                                  'profile_form': profile_form,
                                                  'registerd': registered})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("Your Rango account is disabled")
+        else:
+            print("Invalid login details: {0}, {1}".format(username,password))
+            return HttpResponse("Invalid login details supplied")
+    else:
+        return render(request, 'rango/login.html', {})
+
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you are logged in, you can see this text")
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
