@@ -1,30 +1,57 @@
-<!DOCTYPE html>
-
+<!--<!DOCTYPE html>-->
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Rango</title>
-    </head>
-    <body>
-        <h1>About</h1>
+{% block title_block %}
+    Rango
+{% endblock %}
 
-        <div>
-            Rango says here is the about page. <br />
-        </div>
+{% block body_block %}
+    <h1>About</h1>
 
-        <div>
-            <a href="/rango/">Index</a><br />
-            <img src="{% static "images/doge.jpg" %}" alt="Picture of doge" />
-        </div>
+    <div>
+        Rango says here is the about page. <br />
+    </div>
 
-        <div>
-             This tutorial has been put together by Aleksandar Tsolov <br />
-        </div>
+    <div>
+        <img src="{% static "images/doge.jpg" %}" alt="Picture of doge" />
+    </div>
 
-        <div>
-            <img src="{{MEDIA_URL}}cat.jpg" alt="Cat pic">
-        </div>
-    </body>
+    <div>
+         This tutorial has been put together by Aleksandar Tsolov <br />
+    </div>
 
-</html>
+    <div>
+        <img src="{{MEDIA_URL}}cat.jpg" alt="Cat pic">
+    </div>
+{% endblock %}
+
+
+
+
+<!--<html>-->
+    <!--<head>-->
+        <!--<title>Rango</title>-->
+    <!--</head>-->
+    <!--<body>-->
+        <!--<h1>About</h1>-->
+
+        <!--<div>-->
+            <!--Rango says here is the about page. <br />-->
+        <!--</div>-->
+
+        <!--<div>-->
+            <!--<a href="/rango/">Index</a><br />-->
+            <!--<img src="{% static "images/doge.jpg" %}" alt="Picture of doge" />-->
+        <!--</div>-->
+
+        <!--<div>-->
+             <!--This tutorial has been put together by Aleksandar Tsolov <br />-->
+        <!--</div>-->
+
+        <!--<div>-->
+            <!--<img src="{{MEDIA_URL}}cat.jpg" alt="Cat pic">-->
+        <!--</div>-->
+    <!--</body>-->
+
+<!--</html>-->
